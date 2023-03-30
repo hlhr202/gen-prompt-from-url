@@ -23,11 +23,12 @@ class App:
         BeautifulSoupWebReader = download_loader("BeautifulSoupWebReader")
         loader = BeautifulSoupWebReader()
         documents = loader.load_data(urls=[url])
-        index = GPTSimpleVectorIndex(documents)
+        index = GPTSimpleVectorIndex.from_documents(documents)
         response = index.query(
-            'Give me keywords of this page, return with comma delimiter and without title').response
+            use_async=False,
+            query_str='Give me keywords of this page, return with comma delimiter and without title')
         if response != None:
-            return response.strip()
+            return str(response).strip() # type: ignore
 
     def generate(self, starting_text: str):
         print(starting_text)
@@ -93,7 +94,7 @@ class App:
             change_btn.click(handle_keyword_change,
                              inputs=keywords, outputs=dataframe)
 
-        block.launch()
+        block.launch(share=True)
 
 
 app = App()

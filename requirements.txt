@@ -1,6 +1,6 @@
 --extra-index-url https://download.pytorch.org/whl/cu117
 transformers
 gradio
-torch==1.13.1+cu117
-llama_index
+torch==1.13.1
+llama_index==0.5.1
 python-dotenv
